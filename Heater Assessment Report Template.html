@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* Fonts */
+@font-face {
+  font-family: 'FabricMDL2Icons';
+  src: url('https://appsforoffice.microsoft.com/fabric/fonts/icons/FabricMDL2Icons.woff') format('woff'),
+       url('https://appsforoffice.microsoft.com/fabric/fonts/icons/FabricMDL2Icons.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Segoe UI";
+  src: local("Segoe UI"), url("https://appsforoffice.microsoft.com/fabric/fonts/SegoeUI-WestEuropean/SegoeUI-Regular.woff2") format("woff2"),
+       url("https://appsforoffice.microsoft.com/fabric/fonts/SegoeUI-WestEuropean/SegoeUI-Regular.woff") format("woff");
+  font-weight: 400;
+}
+
+/* Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f2f2f2;
+  color: #222;
+}
+
+/* Outer Container */
+.OuterContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header */
+.HeaderCell {
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #e4e4e4;
+}
+.HeaderCell img {
+  max-height: 90px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+.ReportTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 4px 0;
+}
+.ReportSubtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+.ReportMeta {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Table */
+.ContentTable {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ContentTable th, .ContentTable td {
+  border: 1px solid #dedede;
+  padding: 10px;
+  font-size: 14px;
+}
+.ContentTable th {
+  background-color: #f9f9f9;
+  text-align: left;
+  width: 35%;
+  font-weight: bold;
+}
+
+/* Footer */
+.FooterCell {
+  background: #fff;
+  padding: 20px;
+  font-size: 12px;
+  color: #555;
+  border-top: 1px solid #e4e4e4;
+}
+.FooterCell img {
+  max-height: 90px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Responsive */
+@media only screen and (max-width: 768px) {
+  .OuterContainer {
+    width: 95%;
+  }
+  .HeaderCell img, .FooterCell img {
+    max-width: 150px;
+    height: auto;
+  }
+  .ReportTitle {
+    font-size: 18px;
+  }
+  .ContentTable {
+    width: 95%;
+  }
+  .ContentTable th, .ContentTable td {
+    display: block;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="OuterContainer">
+  <!-- Header -->
+  <div class="HeaderCell">
+    <img src="https://stingraymanufacturers.github.io/powerautomate/Alva.png" alt="Header Logo">
+    <div class="ReportTitle">Heater Assessment Report</div>
+    <div class="ReportSubtitle">Product Inspection Details</div>
+    <div class="ReportMeta"> Generated: @{utcNow()} &nbsp;|&nbsp; Version: QA-1.0
+  </div>
+
+  <!-- Table -->
+  <table class="ContentTable">
+  <tr><th>Customer Name</th><td>@{items('For_each')?['Title']}</td></tr>
+  <tr><th>Guarantee</th><td>@{items('For_each')?['Guarantee/Value']}</td></tr>
+  <tr><th>Repair number</th><td>@{items('For_each')?['Repair_x0020_number']}</td></tr>
+  <tr><th>Product Code</th><td>@{items('For_each')?['Product_x0020_Code']}</td></tr>
+  <tr><th>Leak Test</th><td>@{items('For_each')?['Leak_x0020_Test/Value']}</td></tr>
+  <tr><th>Thermocouple</th><td>@{items('For_each')?['Thermocouple/Value']}</td></tr>
+  <tr><th>Regulator</th><td>@{items('For_each')?['Regulator/Value']}</td></tr>
+  <tr><th>Gas Valve</th><td>@{items('For_each')?['Gas_x0020_Valve/Value']}</td></tr>
+  <tr><th>ODS/ Pilot Flame</th><td>@{items('For_each')?['ODS_x002f__x0020_Pilot_x0020_Fla/Value']}</td></tr>
+  <tr><th>Jet/ Pipes</th><td>@{items('For_each')?['Jet_x002f__x0020_Pipes/Value']}</td></tr>
+  <tr><th>Blockage</th><td>@{items('For_each')?['Blockage/Value']}</td></tr>
+  <tr><th>Bulb Switch</th><td>@{items('For_each')?['Bulb_x0020_Switch/Value']}</td></tr>
+  <tr><th>Damaged Packaging</th><td>@{items('For_each')?['Damaged_x0020_Packaging/Value']}</td></tr>
+  <tr><th>Product Outcome</th><td>@{items('For_each')?['Product_x0020_Outcome/Value']}</td></tr>
+  <tr><th>Destination</th><td>@{items('For_each')?['Destination/Value']}</td></tr>
+  <tr><th>Transportation Mode</th><td>@{items('For_each')?['Transportation_x0020_Mode/Value']}</td></tr>
+  <tr><th>Tested By</th><td>@{items('For_each')?['Tested_x0020_By']}</td></tr>
+  <tr><th>Test Date</th><td>@{items('For_each')?['Test_x0020_Date']}</td></tr>
+  </table>
+
+  <!-- Footer -->
+  <div class="FooterCell">
+    <img src="https://stingraymanufacturers.github.io/powerautomate/LPGSA.png" alt="Footer Logo">
+    This inspection report is prepared for internal quality assurance. Tests were performed under controlled conditions and in accordance with applicable safety guidelines. Results do not constitute a warranty of performance in environments or use cases outside the test scope.<br><br>
+    © 2025 The Stingray Group. All rights reserved. 
+  </div>
+</div>
+
+</body>
+</html>
